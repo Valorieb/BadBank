@@ -7,7 +7,12 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
 export const CreateAccount = () => {
-  const initialValues = { email: "", password: "" };
+  const initialValues = {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+  };
   const [formValues, setFormValues] = useState(initialValues);
 
   const handleChange = (e) => {
@@ -50,10 +55,24 @@ export const CreateAccount = () => {
 
           <Row>
             <Col>
-              <Form.Control placeholder="First name" />
+              <div className="field">
+                <Form.Control
+                  placeholder="First name"
+                  type="first-name"
+                  name="firstName"
+                  value={formValues.firstName}
+                  onChange={handleChange}
+                />
+              </div>
             </Col>
             <Col>
-              <Form.Control placeholder="Last name" />
+              <Form.Control
+                placeholder="Last name"
+                type="last-name"
+                name="lastName"
+                value={formValues.lastName}
+                onChange={handleChange}
+              />
             </Col>
           </Row>
         </Form>
