@@ -6,7 +6,7 @@ export const Withdraw = () => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
-        <Card.Title>Deposit</Card.Title>
+        <Card.Title>Withdraw</Card.Title>
         <Card.Text>Current Amount:</Card.Text>
         <Card.Text>$,1000</Card.Text>
         <Card.Text>Withdraw Amount:</Card.Text>
