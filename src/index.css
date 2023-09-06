@@ -43,3 +43,7 @@ nav a.active {
   font-family: "Rubik Mono One", sans-serif;
   padding: 10px;
 }
+
+.errorMsg {
+  color: red;
+}
