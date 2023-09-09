@@ -51,10 +51,10 @@ export const CreateAccount = () => {
     }
     if (!values.password) {
       errors.password = "Please enter your password";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be at least five characters";
-    } else if (values.password.length > 10) {
-      errors.password = "Password must be less than ten characters";
+    } else if (values.password.length < 8) {
+      errors.password = "Password must be at least eight characters";
+    } else if (values.password.length > 15) {
+      errors.password = "Password must be less than fifteen characters";
     }
     return errors;
   };
@@ -65,7 +65,7 @@ export const CreateAccount = () => {
         {Object.keys(formErrors).length === 0 && isSubmit ? (
           <div className="uiSuccessMsg">Account Created!</div>
         ) : (
-          <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+          ""
         )}
         <Card.Title>Create Account</Card.Title>
         <Form onSubmit={handleSubmit}>
