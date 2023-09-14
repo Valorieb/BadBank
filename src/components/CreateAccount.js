@@ -69,9 +69,33 @@ export const CreateAccount = () => {
         )}
         <Card.Title>Create Account</Card.Title>
         <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col>
+              <div className="field">
+                <Form.Control
+                  placeholder="First name"
+                  type="first-name"
+                  name="firstName"
+                  value={formValues.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+              <p className="errorMsg">{formErrors.firstName}</p>
+            </Col>
+            <Col>
+              <Form.Control
+                placeholder="Last name"
+                type="last-name"
+                name="lastName"
+                value={formValues.lastName}
+                onChange={handleChange}
+              />
+              <p className="errorMsg">{formErrors.lastName}</p>
+            </Col>
+          </Row>
           <Form.Group className="mb-3" controlId="controlName">
             <div className="field">
-              <Form.Label>Enter email</Form.Label>
+              <Form.Label>Email</Form.Label>
 
               <Form.Control
                 type="email"
@@ -97,30 +121,6 @@ export const CreateAccount = () => {
             <p className="errorMsg">{formErrors.password}</p>
           </Form.Group>
 
-          <Row>
-            <Col>
-              <div className="field">
-                <Form.Control
-                  placeholder="First name"
-                  type="first-name"
-                  name="firstName"
-                  value={formValues.firstName}
-                  onChange={handleChange}
-                />
-              </div>
-              <p className="errorMsg">{formErrors.firstName}</p>
-            </Col>
-            <Col>
-              <Form.Control
-                placeholder="Last name"
-                type="last-name"
-                name="lastName"
-                value={formValues.lastName}
-                onChange={handleChange}
-              />
-              <p className="errorMsg">{formErrors.lastName}</p>
-            </Col>
-          </Row>
           <br />
           <Button onClick={handleSubmit} variant="primary">
             Create Account
