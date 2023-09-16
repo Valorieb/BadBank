@@ -1,5 +1,5 @@
 body {
-  background-image: url("Assets/grayBackground.jpg");
+  background-image: url("assets/grayBackground.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
@@ -46,4 +46,10 @@ nav a.active {
 
 .errorMsg {
   color: red;
+}
+
+.uiSuccessMsg {
+  font-size: x-large;
+  color: green;
+  padding: 20px;
 }

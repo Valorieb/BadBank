@@ -53,8 +53,8 @@ export const CreateAccount = () => {
       errors.password = "Please enter your password";
     } else if (values.password.length < 8) {
       errors.password = "Password must be at least eight characters";
-    } else if (values.password.length > 15) {
-      errors.password = "Password must be less than fifteen characters";
+    } else if (values.password.length > 20) {
+      errors.password = "Password must be less than twenty characters";
     }
     return errors;
   };
@@ -131,7 +131,4 @@ export const CreateAccount = () => {
   );
 };
 
-//NOTES:
-//   <pre> element is displayed and formatted exactly as written.
-//    JSON.stringify converts JavaScript value to JSON string.
-//    This line is similar to using console.log() to test the code.
+// //<a href="https://www.flaticon.com/free-stickers/spaceship" title="spaceship stickers">Spaceship stickers created by Stickers - Flaticon</a>

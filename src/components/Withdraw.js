@@ -1,29 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 
-export const Withdraw = () => {
-  const [withdrawal, setWithdrawal] = useState(0);
-  const [totalState, setTotalState] = useState(100);
-  const [validTransaction, setValidTransaction] = useState(false);
+const Withdraw = ({ handleWithdrawSubmit, balance }) => {
+  const [withdraw, setWithdraw] = useState(0); // Local withdraw state
 
   const handleChange = (e) => {
-    if (Number(e.target.value) > totalState) {
-      return setValidTransaction(false);
+    const amount = Number(e.target.value);
+    if (amount > 0) {
+      setWithdraw(amount); // Update local deposit state
     } else {
-      setValidTransaction(true);
+      setWithdraw(0); // Ensure deposit is non-negative
     }
-    setWithdrawal(Number(e.target.value));
-  };
-
-  const handleSubmit = (e) => {
-    let newTotal = totalState - withdrawal;
-    setTotalState(newTotal);
-    alert(
-      `Nice! You withdrew $${withdrawal}. You have $${newTotal} remaining.`
-    );
-    e.preventDefault();
   };
 
   return (
@@ -31,19 +20,25 @@ export const Withdraw = () => {
       <Card.Body>
         <Card.Title>Withdraw</Card.Title>
         <Card.Text>Balance:</Card.Text>
-        <Card.Text>${totalState}</Card.Text>
+        <Card.Text id="total">${balance}</Card.Text>
         <Card.Text>Withdraw Amount:</Card.Text>
         <Form.Control
-          type="text"
-          placeholder="Normal text"
           onChange={handleChange}
-          isValid={validTransaction}
+          type="text"
+          placeholder="Enter an amount"
+          value={withdraw}
         />
         <br />
-        <Button onClick={handleSubmit} variant="primary">
+        <Button
+          disabled={withdraw <= 0}
+          onClick={() => handleWithdrawSubmit(withdraw)} // Pass deposit to parent function
+          variant="primary"
+        >
           Withdraw
         </Button>
       </Card.Body>
     </Card>
   );
 };
+
+export default Withdraw;
