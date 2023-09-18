@@ -23,7 +23,7 @@ Due Wed, Sep. 27th
 Create account page should include the following functionality:
 Success message: Upon selecting the create account button the user should see a success message.
 Add Another Account Button: Upon selecting the create account button, the user should see an add another account button.
-Cleared Create Account Form: Upon selecting the create account button, t will open a cleared create account form.
+Cleared Create Account Form: Upon selecting the create account button, it will open a cleared create account form.
 Name validation: The user receives an alert if the name field is left blank.
 Email validation: The user receives an alert if this field is blank
 Password validation: The user receives an alert if the password is less than 8 characters long.

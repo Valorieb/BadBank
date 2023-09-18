@@ -27,6 +27,7 @@ export const CreateAccount = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    setFormValues(initialValues);
   };
 
   useEffect(() => {
