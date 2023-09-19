@@ -26,6 +26,12 @@ export const CreateAccount = () => {
     console.log(formValues);
   };
 
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    const errors = validate({ ...formValues, [name]: e.target.value });
+    setFormErrors(errors);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmit(true);
@@ -42,6 +48,7 @@ export const CreateAccount = () => {
     setIsSubmit(false);
     setFormValues(initialValues);
     setFormErrors({});
+    setIsFormValid(false);
   };
 
   const validate = (values) => {
@@ -90,10 +97,11 @@ export const CreateAccount = () => {
                   <div className="field">
                     <Form.Control
                       placeholder="First name"
-                      type="first-name"
+                      type="text"
                       name="firstName"
                       value={formValues.firstName}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <p className="errorMsg">{formErrors.firstName}</p>
@@ -101,10 +109,11 @@ export const CreateAccount = () => {
                 <Col>
                   <Form.Control
                     placeholder="Last name"
-                    type="last-name"
+                    type="text"
                     name="lastName"
                     value={formValues.lastName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                   <p className="errorMsg">{formErrors.lastName}</p>
                 </Col>
@@ -119,6 +128,7 @@ export const CreateAccount = () => {
                     placeholder="Enter email"
                     value={formValues.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                 </div>
                 <p className="errorMsg">{formErrors.email}</p>
@@ -132,13 +142,18 @@ export const CreateAccount = () => {
                     placeholder="Password"
                     value={formValues.password}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                 </div>
                 <p className="errorMsg">{formErrors.password}</p>
               </Form.Group>
 
               <br />
-              <Button onClick={handleSubmit} variant="primary">
+              <Button
+                onClick={handleSubmit}
+                variant="primary"
+                disabled={!isFormValid}
+              >
                 Create Account
               </Button>
             </Form>
@@ -146,12 +161,7 @@ export const CreateAccount = () => {
         ) : (
           <div>
             <div className="uiSuccessMsg">Account Created!</div>
-            <Button
-              onClick={handleCreateAnotherAccount}
-              variant="primary"
-              disabled={!isFormValid}
-              className={!isFormValid ? "custom-disabled-button" : ""}
-            >
+            <Button onClick={handleCreateAnotherAccount} variant="primary">
               Create Another Account
             </Button>
           </div>
