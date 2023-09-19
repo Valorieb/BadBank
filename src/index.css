@@ -44,6 +44,12 @@ nav a.active {
   padding: 10px;
 }
 
+.custom-disabled-button {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
 .errorMsg {
   color: red;
 }

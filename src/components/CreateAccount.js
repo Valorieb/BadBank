@@ -16,26 +16,34 @@ export const CreateAccount = () => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isAccountCreated, setIsAccountCreated] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleChange = (e) => {
-    // console.log(e.target);
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    setFormErrors({ ...formErrors, [name]: "" });
     console.log(formValues);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
     setIsSubmit(true);
-    setFormValues(initialValues);
+    const errors = validate(formValues);
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      setIsAccountCreated(true);
+    }
   };
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  });
+  const handleCreateAnotherAccount = () => {
+    setIsAccountCreated(false);
+    setIsSubmit(false);
+    setFormValues(initialValues);
+    setFormErrors({});
+  };
+
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -57,79 +65,98 @@ export const CreateAccount = () => {
     } else if (values.password.length > 20) {
       errors.password = "Password must be less than twenty characters";
     }
+    const isValid = Object.keys(errors).length === 0;
+    setIsFormValid(isValid);
     return errors;
   };
+
+  useEffect(() => {
+    if (isSubmit) {
+      const errors = validate(formValues);
+      setFormErrors(errors);
+      setIsFormValid(Object.keys(errors).length === 0);
+    }
+  }, [formValues, isSubmit]);
 
   return (
     <Card style={{ width: "18rem", margin: "auto" }}>
       <Card.Body>
-        {Object.keys(formErrors).length === 0 && isSubmit ? (
-          <div className="uiSuccessMsg">Account Created!</div>
+        {!isAccountCreated ? (
+          <>
+            <Card.Title>Create Account</Card.Title>
+            <Form onSubmit={handleSubmit}>
+              <Row>
+                <Col>
+                  <div className="field">
+                    <Form.Control
+                      placeholder="First name"
+                      type="first-name"
+                      name="firstName"
+                      value={formValues.firstName}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <p className="errorMsg">{formErrors.firstName}</p>
+                </Col>
+                <Col>
+                  <Form.Control
+                    placeholder="Last name"
+                    type="last-name"
+                    name="lastName"
+                    value={formValues.lastName}
+                    onChange={handleChange}
+                  />
+                  <p className="errorMsg">{formErrors.lastName}</p>
+                </Col>
+              </Row>
+              <Form.Group className="mb-3" controlId="controlName">
+                <div className="field">
+                  <Form.Label>Email</Form.Label>
+
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    value={formValues.email}
+                    onChange={handleChange}
+                  />
+                </div>
+                <p className="errorMsg">{formErrors.email}</p>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="controlPassword">
+                <div className="field">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formValues.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <p className="errorMsg">{formErrors.password}</p>
+              </Form.Group>
+
+              <br />
+              <Button onClick={handleSubmit} variant="primary">
+                Create Account
+              </Button>
+            </Form>
+          </>
         ) : (
-          ""
+          <div>
+            <div className="uiSuccessMsg">Account Created!</div>
+            <Button
+              onClick={handleCreateAnotherAccount}
+              variant="primary"
+              disabled={!isFormValid}
+              className={!isFormValid ? "custom-disabled-button" : ""}
+            >
+              Create Another Account
+            </Button>
+          </div>
         )}
-        <Card.Title>Create Account</Card.Title>
-        <Form onSubmit={handleSubmit}>
-          <Row>
-            <Col>
-              <div className="field">
-                <Form.Control
-                  placeholder="First name"
-                  type="first-name"
-                  name="firstName"
-                  value={formValues.firstName}
-                  onChange={handleChange}
-                />
-              </div>
-              <p className="errorMsg">{formErrors.firstName}</p>
-            </Col>
-            <Col>
-              <Form.Control
-                placeholder="Last name"
-                type="last-name"
-                name="lastName"
-                value={formValues.lastName}
-                onChange={handleChange}
-              />
-              <p className="errorMsg">{formErrors.lastName}</p>
-            </Col>
-          </Row>
-          <Form.Group className="mb-3" controlId="controlName">
-            <div className="field">
-              <Form.Label>Email</Form.Label>
-
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="Enter email"
-                value={formValues.email}
-                onChange={handleChange}
-              />
-            </div>
-            <p className="errorMsg">{formErrors.email}</p>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="controlPassword">
-            <div className="field">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formValues.password}
-                onChange={handleChange}
-              />
-            </div>
-            <p className="errorMsg">{formErrors.password}</p>
-          </Form.Group>
-
-          <br />
-          <Button onClick={handleSubmit} variant="primary">
-            Create Account
-          </Button>
-        </Form>
       </Card.Body>
     </Card>
   );
 };
-
-// //<a href="https://www.flaticon.com/free-stickers/spaceship" title="spaceship stickers">Spaceship stickers created by Stickers - Flaticon</a>
