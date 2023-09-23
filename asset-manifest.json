@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/BadBank/static/css/main.01051bae.css",
+    "main.js": "/BadBank/static/js/main.a41e3ba2.js",
+    "static/js/787.a84f74d6.chunk.js": "/BadBank/static/js/787.a84f74d6.chunk.js",
+    "static/media/grayBackground.jpg": "/BadBank/static/media/grayBackground.7c5e865cd59b6cd3134e.jpg",
+    "index.html": "/BadBank/index.html",
+    "main.01051bae.css.map": "/BadBank/static/css/main.01051bae.css.map",
+    "main.a41e3ba2.js.map": "/BadBank/static/js/main.a41e3ba2.js.map",
+    "787.a84f74d6.chunk.js.map": "/BadBank/static/js/787.a84f74d6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01051bae.css",
+    "static/js/main.a41e3ba2.js"
+  ]
+}
