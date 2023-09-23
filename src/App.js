@@ -12,6 +12,8 @@ function App() {
   const [transactions, setTransactions] = useState([]);
   const [account, setAccount] = useState([]);
 
+  //Create Account
+
   const handleCreateAccount = (formValues) => {
     const newAccount = {
       ...formValues,
@@ -19,19 +21,12 @@ function App() {
     setAccount([...account, newAccount]);
   };
 
+  //Deposit
   const updateBalanceDeposit = (amount) => {
     setBalance((prevBalance) => prevBalance + amount);
     setTransactions((prevTransactions) => [
       ...prevTransactions,
       { type: "Deposit", amount: amount, date: new Date() },
-    ]);
-  };
-
-  const updateBalanceWithdraw = (amount) => {
-    setBalance((prevBalance) => prevBalance - amount);
-    setTransactions((prevTransactions) => [
-      ...prevTransactions,
-      { type: "Withdrawal", amount: amount, date: new Date() },
     ]);
   };
 
@@ -45,6 +40,15 @@ function App() {
         balance + amount
       }.`
     );
+  };
+
+  //Withdrawal
+  const updateBalanceWithdraw = (amount) => {
+    setBalance((prevBalance) => prevBalance - amount);
+    setTransactions((prevTransactions) => [
+      ...prevTransactions,
+      { type: "Withdrawal", amount: amount, date: new Date() },
+    ]);
   };
 
   const handleWithdrawSubmit = (amount) => {

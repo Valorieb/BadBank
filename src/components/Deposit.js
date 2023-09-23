@@ -4,15 +4,13 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 
 const Deposit = ({ handleDepositSubmit, balance }) => {
-  const [deposit, setDeposit] = useState(); // Local deposit state
+  const [deposit, setDeposit] = useState(""); // Local deposit state
   const [formErrors, setFormErrors] = useState({});
+  const [touched, setTouched] = useState(false);
 
   const validateDeposit = (amount) => {
-    if (amount <= 0) {
-      return "Deposit amount must be greater than 0";
-    }
-    if (isNaN(amount)) {
-      return "Deposit amount must be a number";
+    if (isNaN(amount) || amount <= 0) {
+      return "Deposit amount must be a valid positive number.";
     }
     return null;
   };
@@ -25,13 +23,34 @@ const Deposit = ({ handleDepositSubmit, balance }) => {
       setFormErrors({ deposit: validationError });
     } else {
       setFormErrors({});
-      handleDepositSubmit(deposit);
+      handleDepositSubmit(parseFloat(deposit));
     }
   };
 
   const handleChange = (e) => {
     const amount = Number(e.target.value);
-    setDeposit(amount);
+    if (/^\d*\.?\d*$/.test(amount)) {
+      setDeposit(amount);
+      setFormErrors({});
+    } else {
+      setFormErrors({
+        deposit: "Deposit amount must be a valid positive number",
+      });
+    }
+  };
+
+  const handleBlur = () => {
+    // Validate on blur if the input has been touched
+    if (touched) {
+      const validationError = validateDeposit(deposit);
+      if (validationError) {
+        setFormErrors({ deposit: validationError });
+      }
+    }
+  };
+
+  const handleFocus = () => {
+    setTouched(true);
   };
 
   return (
@@ -44,15 +63,19 @@ const Deposit = ({ handleDepositSubmit, balance }) => {
           <Card.Text>Deposit Amount:</Card.Text>
           <Form.Control
             onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
             type="text"
             placeholder="Enter an amount"
             value={deposit}
             isInvalid={!!formErrors.deposit}
           />
-          <p className="errorMsg"></p>
+          <Form.Control.Feedback type="invalid">
+            {formErrors.deposit}
+          </Form.Control.Feedback>
           <br />
           <Button
-            disabled={deposit <= 0}
+            disabled={deposit === ""}
             onClick={() => handleDepositSubmit(deposit)} // Pass deposit to parent function
             variant="primary"
           >
