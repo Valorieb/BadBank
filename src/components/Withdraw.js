@@ -16,7 +16,7 @@ const Withdraw = ({ handleWithdrawSubmit, balance }) => {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: "18rem", margin: "auto" }}>
       <Card.Body>
         <Card.Title>Withdraw</Card.Title>
         <Card.Text>Balance:</Card.Text>

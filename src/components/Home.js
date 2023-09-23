@@ -5,11 +5,11 @@ export const Home = () => {
       <h1>Bad Bank</h1>
       <Card
         style={{
-          background:
-            "linear-gradient(to right, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5))",
+          background: "linear-gradient(to right, gray, black)",
           width: "40rem",
           padding: "10px",
           margin: "auto",
+          color: "white",
         }}
       >
         <Card.Img variant="top" src="/images/bank_heist.jpg" />

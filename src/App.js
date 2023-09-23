@@ -10,12 +10,22 @@ import Withdraw from "./components/Withdraw.js";
 function App() {
   const [balance, setBalance] = useState(0);
 
+  const [transactions, setTransactions] = useState([]);
+
   const updateBalanceDeposit = (amount) => {
     setBalance((prevBalance) => prevBalance + amount);
+    setTransactions((prevTransactions) => [
+      ...prevTransactions,
+      { type: "Deposit", amount: amount, date: new Date() },
+    ]);
   };
 
   const updateBalanceWithdraw = (amount) => {
     setBalance((prevBalance) => prevBalance - amount);
+    setTransactions((prevTransactions) => [
+      ...prevTransactions,
+      { type: "Withdrawal", amount: amount, date: new Date() },
+    ]);
   };
 
   const handleDepositSubmit = (amount) => {
@@ -24,7 +34,9 @@ function App() {
     }
     updateBalanceDeposit(amount); // Update the balance in App.js
     alert(
-      `You deposited $${amount}. Your balance is now $${balance + amount}.`
+      `Success! You deposited $${amount}. Your balance is now $${
+        balance + amount
+      }.`
     );
   };
 
@@ -33,7 +45,11 @@ function App() {
       return;
     }
     updateBalanceWithdraw(amount); // Update the balance in App.js
-    alert(`You withdrew $${amount}. Your balance is now $${balance - amount}.`);
+    alert(
+      `Success! You withdrew $${amount}. Your balance is now $${
+        balance - amount
+      }.`
+    );
   };
 
   return (
@@ -41,7 +57,10 @@ function App() {
       <NavbarMenu />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="AllData" element={<AllData />} />
+        <Route
+          path="AllData"
+          element={<AllData transactions={transactions} />}
+        />
         <Route
           path="Deposit"
           element={
