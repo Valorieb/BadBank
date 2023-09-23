@@ -12,7 +12,7 @@ export const Home = () => {
           color: "white",
         }}
       >
-        <Card.Img variant="top" src="/images/bank_heist.jpg" />
+        <Card.Img variant="top" src="/images/bank_heist.jpg" alt="bank heist" />
         <Card.Body>
           <Card.Title>Welcome to Bad Bank!</Card.Title>
           <Card.Text>
