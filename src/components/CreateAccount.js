@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-export const CreateAccount = () => {
+export const CreateAccount = ({ handleCreateAccount }) => {
   const initialValues = {
     email: "",
     password: "",
@@ -21,8 +21,12 @@ export const CreateAccount = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
     setFormErrors({ ...formErrors, [name]: "" });
+
     console.log(formValues);
   };
 
@@ -41,12 +45,13 @@ export const CreateAccount = () => {
     if (Object.keys(errors).length === 0) {
       setIsAccountCreated(true);
     }
+    handleCreateAccount(formValues);
+    setFormValues(initialValues);
   };
 
   const handleCreateAnotherAccount = () => {
     setIsAccountCreated(false);
     setIsSubmit(false);
-    setFormValues(initialValues);
     setFormErrors({});
     setIsFormValid(false);
   };

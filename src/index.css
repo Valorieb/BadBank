@@ -25,6 +25,18 @@ h1 {
   font-family: "Rubik Mono One", sans-serif;
 }
 
+h2 {
+  text-align: center;
+  padding: 20px;
+  font-family: "Rubik Mono One", sans-serif;
+}
+
+h3 {
+  text-align: center;
+  padding: 20px;
+  font-family: "Rubik Mono One", sans-serif;
+}
+
 nav {
   background-color: rgb(180, 216, 248);
   padding: 16px 32px;
@@ -37,6 +49,10 @@ nav a {
 nav a.active {
   text-shadow: 1px 1px 10px rgb(255, 174, 187);
   font-weight: bold;
+}
+
+p {
+  font-family: "Kanit", sans-serif;
 }
 
 .badbank {

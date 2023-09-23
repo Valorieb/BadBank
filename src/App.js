@@ -9,8 +9,15 @@ import Withdraw from "./components/Withdraw.js";
 
 function App() {
   const [balance, setBalance] = useState(0);
-
   const [transactions, setTransactions] = useState([]);
+  const [account, setAccount] = useState([]);
+
+  const handleCreateAccount = (formValues) => {
+    const newAccount = {
+      ...formValues,
+    };
+    setAccount([...account, newAccount]);
+  };
 
   const updateBalanceDeposit = (amount) => {
     setBalance((prevBalance) => prevBalance + amount);
@@ -59,7 +66,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="AllData"
-          element={<AllData transactions={transactions} />}
+          element={<AllData transactions={transactions} account={account} />}
         />
         <Route
           path="Deposit"
@@ -81,7 +88,10 @@ function App() {
             />
           }
         />
-        <Route path="CreateAccount" element={<CreateAccount />} />
+        <Route
+          path="CreateAccount"
+          element={<CreateAccount handleCreateAccount={handleCreateAccount} />}
+        />
       </Routes>
     </>
   );
