@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 
 export const AllData = ({ transactions, account }) => {
   return (
-    <Card style={{ width: "33rem", margin: "auto" }}>
+    <Card style={{ width: "66rem", margin: "auto" }}>
       <div>
         <h1>All Data</h1>
         <h2>Transactions: </h2>
@@ -28,7 +28,7 @@ export const AllData = ({ transactions, account }) => {
           ))}
         </ul>
 
-        <h2>User Data:</h2>
+        <h2>Highly Confidential User Data:</h2>
         <ul>
           {account.map((user, index) => (
             <p>
